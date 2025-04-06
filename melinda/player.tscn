@@ -1,20 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfuys3o6getns"]
+[gd_scene load_steps=2 format=3 uid="uid://dfuys3o6getns"]
 
-[ext_resource type="Texture2D" uid="uid://ddbxbk186h7di" path="res://res/Meow Knight/wal/Meow-Knight_Run.png" id="1_4flbx"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 3.0
-height = 10.0
+[ext_resource type="Script" uid="uid://cxaia78xymcqq" path="res://scriptz/scene.gd" id="1_4flbx"]
 
 [node name="overworld" type="Node2D"]
-
-[node name="player" type="CharacterBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="player"]
-position = Vector2(149, 90)
-texture = ExtResource("1_4flbx")
-vframes = 9
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(150, 87)
-shape = SubResource("CapsuleShape2D_onrkg")
+script = ExtResource("1_4flbx")

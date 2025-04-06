@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://djacpn50lptkn"]
+
+[ext_resource type="Script" uid="uid://bvnrw321aqbg1" path="res://scriptz/playerz.gd" id="2_bscx7"]
+[ext_resource type="PackedScene" uid="uid://hvh0w0xks4sd" path="res://playerz.tscn" id="2_qxt1m"]
+[ext_resource type="Script" uid="uid://dw75xwmyjk4ca" path="res://nvel1/enemy.gd" id="3_bscx7"]
+[ext_resource type="Texture2D" uid="uid://bpjr8v3rbygtl" path="res://res/ghost.png" id="3_qxt1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nimaw"]
+size = Vector2(21, 30)
+
+[sub_resource type="Animation" id="Animation_qxt1m"]
+resource_name = "walk"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_bscx7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j4ogn"]
+_data = {
+&"RESET": SubResource("Animation_bscx7"),
+&"walk": SubResource("Animation_qxt1m")
+}
+
+[node name="perseguir" type="Node2D"]
+visible = false
+
+[node name="player" parent="." instance=ExtResource("2_qxt1m")]
+position = Vector2(68, 55)
+script = ExtResource("2_bscx7")
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+script = ExtResource("3_bscx7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+position = Vector2(23, 42)
+texture = ExtResource("3_qxt1m")
+hframes = 9
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(22.5, 47)
+shape = SubResource("RectangleShape2D_nimaw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+libraries = {
+&"": SubResource("AnimationLibrary_j4ogn")
+}
